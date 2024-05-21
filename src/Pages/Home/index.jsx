@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Layout } from "../../Components/Layout";
 import { Card } from "../../Components/Card";
+//import { data } from "autoprefixer";
 
 function Home() {
   const [items, setItems] = useState(null);
 
   useEffect(() => {
     try {
-      fetch("https://api.escuelajs.co/api/v1/products")
+      fetch("https://fakestoreapi.com/products")
         .then((response) => response.json())
         .then((data) => setItems(data));
     } catch (error) {
