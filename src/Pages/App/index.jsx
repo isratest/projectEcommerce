@@ -7,6 +7,7 @@ import { MyOrders } from "../MyOrders";
 import { SingIn } from "../SingIn";
 import { NotFound } from "../NotFound";
 import { Navbar } from "../../Components/Navbar";
+import { CheckoutSideMenu } from "../../Components/CheckoutSideMenu";
 import "../App/App.css";
 
 /*EXCELENTE - ROUTS*/
@@ -30,6 +31,7 @@ function App() {
         <BrowserRouter>
           <AppRoutes />
           <Navbar />
+          <CheckoutSideMenu />
         </BrowserRouter>
       </CartProvider>
     </>
