@@ -94,9 +94,12 @@ const Navbar = () => {
             Sing In
           </NavLink>
         </li>
-        <li className="flex items-center">
+        <li
+          onClick={context.openCheckoutMenu}
+          className=" cursor-pointer flex items-center"
+        >
           <ShoppingCartIcon className="size-4" />
-          {context.count}
+          {context.cartProducts.length}
         </li>
       </ul>
     </nav>

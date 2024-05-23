@@ -13,11 +13,8 @@ const Card = (data) => {
   const addProductsToCart = (event, productData) => {
     event.stopPropagation();
     context.setCartProducts([...context.cartProducts, productData]);
-    context.setCount(context.count + 1);
     context.openCheckoutMenu();
     context.closeProductDetail();
-
-    context.cartProducts.reduce();
   };
 
   const renderIcon = (id) => {

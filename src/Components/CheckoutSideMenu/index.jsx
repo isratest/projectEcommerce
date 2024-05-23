@@ -1,7 +1,9 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { CartContext } from "../../Context";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { MiniCards } from "../MiniCards";
+import { totalPrice } from "../../utils";
 import "./style.css";
 
 function CheckoutSideMenu() {
@@ -12,6 +14,17 @@ function CheckoutSideMenu() {
       (product) => product.id != id
     );
     context.setCartProducts(filteredProduct);
+  };
+
+  const checkCheckout = () => {
+    const addToOrders = {
+      date: "01.05.2024",
+      products: context.cartProducts,
+      quantityProducts: context.cartProducts.length,
+      total: totalPrice(context.cartProducts),
+    };
+    context.setOrder([...context.order, addToOrders]);
+    context.setCartProducts([]);
   };
 
   return (
@@ -29,7 +42,7 @@ function CheckoutSideMenu() {
           <XMarkIcon className="size-6 text-black" />
         </div>
       </div>
-      <div className="px-6 overflow-auto">
+      <div className="px-6 overflow-auto flex-1">
         {context.cartProducts.map((product) => {
           return (
             <MiniCards
@@ -42,6 +55,22 @@ function CheckoutSideMenu() {
             />
           );
         })}
+      </div>
+      <div className="p-6 bg-black sticky items-center center">
+        <p className=" flex justify-between text-white">
+          <span className="text-lg">Total:</span>
+          <span className=" text-lg font-semibold">
+            ${totalPrice(context.cartProducts)}
+          </span>
+        </p>
+        <Link to="/my-orders/last">
+          <button
+            onClick={() => checkCheckout()}
+            className="w-full mt-2 bg-white p-2 rounded-lg"
+          >
+            Checkout
+          </button>
+        </Link>
       </div>
     </aside>
   );
