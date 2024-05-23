@@ -25,6 +25,7 @@ function CheckoutSideMenu() {
     };
     context.setOrder([...context.order, addToOrders]);
     context.setCartProducts([]);
+    context.closeCheckoutMenu();
   };
 
   return (

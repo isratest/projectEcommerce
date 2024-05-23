@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
@@ -25,6 +25,74 @@ const CartProvider = ({ children }) => {
   // Checkout order
   const [order, setOrder] = useState([]);
 
+  // Fetch Api:
+  const [items, setItems] = useState(null);
+  useEffect(() => {
+    try {
+      fetch("https://fakestoreapi.com/products")
+        .then((response) => response.json())
+        .then((data) => setItems(data));
+    } catch (error) {
+      console.log("Error" + error);
+    }
+  }, []);
+
+  // Search
+  const [searchByTitle, setSearchByTitle] = useState(null);
+  const [searchInCategory, setSearchInCategory] = useState(null);
+  const [filteredItems, setFilteredItems] = useState(null);
+
+  const filteredItemsByTitle = (items, searchByTitle) => {
+    return items?.filter((item) =>
+      item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+    );
+  };
+
+  const filteredItemsByCategory = (categories, searchInCategory) => {
+    return categories?.filter((item) =>
+      item.category.toLowerCase().includes(searchInCategory.toLowerCase())
+    );
+  };
+
+  const filterBy = (searchType) => {
+    if (searchType === "BY_TITLE") {
+      return filteredItemsByTitle(items, searchByTitle);
+    }
+    if (searchType === "BY_CATEGORY") {
+      return filteredItemsByCategory(items, searchInCategory);
+    }
+    if (searchType === "BY_TITLE_AND_CATEGORY") {
+      return filteredItemsByCategory(items, searchInCategory).filter((item) =>
+        item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+      );
+    }
+    if (!searchType) {
+      return items;
+    }
+  };
+
+  useEffect(() => {
+    if (searchByTitle && searchInCategory)
+      setFilteredItems(
+        filterBy(
+          "BY_TITLE_AND_CATEGORY",
+          items,
+          searchByTitle,
+          searchInCategory
+        )
+      );
+    if (searchByTitle && !searchInCategory)
+      setFilteredItems(
+        filterBy("BY_TITLE", items, searchByTitle, searchInCategory)
+      );
+    if (!searchByTitle && searchInCategory)
+      setFilteredItems(
+        filterBy("BY_CATEGORY", items, searchByTitle, searchInCategory)
+      );
+    if (!searchByTitle && !searchInCategory)
+      setFilteredItems(filterBy(null, items, searchByTitle, searchInCategory));
+  }, [items, searchByTitle, searchInCategory]);
+
   return (
     <CartContext.Provider
       value={{
@@ -42,6 +110,16 @@ const CartProvider = ({ children }) => {
         openCheckoutMenu,
         order,
         setOrder,
+        items,
+        setItems,
+        searchByTitle,
+        setSearchByTitle,
+        filteredItems,
+        setFilteredItems,
+        filteredItemsByTitle,
+        searchInCategory,
+        setSearchInCategory,
+        filteredItemsByCategory,
       }}
     >
       {children}
