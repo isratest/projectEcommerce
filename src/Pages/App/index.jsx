@@ -8,18 +8,18 @@ import { SingIn } from "../SingIn";
 import { NotFound } from "../NotFound";
 import { Navbar } from "../../Components/Navbar";
 import { CheckoutSideMenu } from "../../Components/CheckoutSideMenu";
+import { Footer } from "../../Components/Footer";
 import "../App/App.css";
 
 /*EXCELENTE - ROUTS*/
 const AppRoutes = () => {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
+    { path: "/all", element: <Home /> },
     { path: "/mensclothing", element: <Home /> },
     { path: "/womensclothing", element: <Home /> },
     { path: "/electronics", element: <Home /> },
     { path: "/jewelery", element: <Home /> },
-    { path: "/other", element: <Home /> },
-    { path: "/", element: <Home /> },
     { path: "/my-account", element: <MyAccount /> },
     { path: "/my-order", element: <MyOrder /> },
     { path: "/my-orders", element: <MyOrders /> },
@@ -41,6 +41,7 @@ function App() {
           <Navbar />
           <CheckoutSideMenu />
         </BrowserRouter>
+        <Footer />
       </CartProvider>
     </>
   );

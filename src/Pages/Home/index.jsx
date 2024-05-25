@@ -9,14 +9,16 @@ function Home() {
   const context = useContext(CartContext);
 
   const renderView = () => {
-    if (context.searchByTitle?.length > 0) {
-      return context.filteredItems?.map((item) => {
-        return <Card key={item.id} data={item} />;
-      });
+    if (context.filteredItems?.length > 0) {
+      return context.filteredItems?.map((item) => (
+        <Card key={item.id} data={item} />
+      ));
     } else {
-      return context.items?.map((item) => {
-        return <Card key={item.id} data={item} />;
-      });
+      return (
+        <div>
+          <h1>We dont have anything. 😵‍💫</h1>
+        </div>
+      );
     }
   };
   return (

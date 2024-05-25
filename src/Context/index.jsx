@@ -37,6 +37,8 @@ const CartProvider = ({ children }) => {
     }
   }, []);
 
+  // console.log(items);
+
   // Search
   const [searchByTitle, setSearchByTitle] = useState(null);
   const [searchInCategory, setSearchInCategory] = useState(null);
@@ -47,14 +49,20 @@ const CartProvider = ({ children }) => {
       item.title.toLowerCase().includes(searchByTitle.toLowerCase())
     );
   };
+  //console.log(items);
 
-  const filteredItemsByCategory = (categories, searchInCategory) => {
-    return categories?.filter((item) =>
+  const filteredItemsByCategory = (items, searchInCategory) => {
+    return items?.filter((item) =>
       item.category.toLowerCase().includes(searchInCategory.toLowerCase())
     );
   };
 
+  //console.log(searchInCategory);
+
   const filterBy = (searchType) => {
+    if (!searchType) {
+      return items;
+    }
     if (searchType === "BY_TITLE") {
       return filteredItemsByTitle(items, searchByTitle);
     }
@@ -65,9 +73,6 @@ const CartProvider = ({ children }) => {
       return filteredItemsByCategory(items, searchInCategory).filter((item) =>
         item.title.toLowerCase().includes(searchByTitle.toLowerCase())
       );
-    }
-    if (!searchType) {
-      return items;
     }
   };
 
@@ -92,7 +97,6 @@ const CartProvider = ({ children }) => {
     if (!searchByTitle && !searchInCategory)
       setFilteredItems(filterBy(null, items, searchByTitle, searchInCategory));
   }, [items, searchByTitle, searchInCategory]);
-
   return (
     <CartContext.Provider
       value={{
@@ -120,6 +124,7 @@ const CartProvider = ({ children }) => {
         searchInCategory,
         setSearchInCategory,
         filteredItemsByCategory,
+        filterBy,
       }}
     >
       {children}

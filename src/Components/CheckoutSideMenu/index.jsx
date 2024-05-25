@@ -24,6 +24,7 @@ function CheckoutSideMenu() {
       total: totalPrice(context.cartProducts),
     };
     context.setOrder([...context.order, addToOrders]);
+    context.setSearchByTitle(null);
     context.setCartProducts([]);
     context.closeCheckoutMenu();
   };
