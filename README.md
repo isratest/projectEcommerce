@@ -1,8 +1,21 @@
-# React + Vite
+![alt text](/assets/Captura%20de%20pantalla%202024-05-27%20045727.png)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# - 🛒 ProjectEcommerce.
 
-Currently, two official plugins are available:
+-DEPLOY: https://master--ecomercpro.netlify.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This Project, have a web Ecommerce, with a consume a API (https://fakestoreapi.com/), and this page i make with a course of Platzi to my practice and experience with:
+
+```
+- Shopping Cart.
+- Render View Details.
+- Orders Detail.
+- Checkout.
+- Button Logout and Login.
+
+TECNOLOGIES:
+- React.js
+- CSS
+- Tailwind
+- GSAP (IN PROGRES)🔩
+```
