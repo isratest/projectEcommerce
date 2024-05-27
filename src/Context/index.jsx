@@ -1,8 +1,13 @@
 import { createContext, useState, useEffect } from "react";
+import useLocalStorage from "../utils/useLocalStorage";
 
 const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
+  //LogIn/LogOut:
+  const [log, setLog] = useLocalStorage("sing-out", true);
+  //Account:
+
   // Product Detail Open/Close
   const [productDetailOpen, setproductDetailOpen] = useState(false);
   const openProductDetail = () => setproductDetailOpen(true);
@@ -125,6 +130,8 @@ const CartProvider = ({ children }) => {
         setSearchInCategory,
         filteredItemsByCategory,
         filterBy,
+        log,
+        setLog,
       }}
     >
       {children}
